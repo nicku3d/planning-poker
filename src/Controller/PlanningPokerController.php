@@ -14,7 +14,14 @@ class PlanningPokerController extends AbstractController
     #[Route('/', name: 'homepage')]
     public function homepage(): Response
     {
-        return new Response('Title: "Plan your poker"');
+        return $this->render('planning-poker/homepage.html.twig', [
+            'title' => 'Planning Poker',
+        ]);
+    }
+
+    public function createGame(): Response
+    {
+        return new Response('Creating game');
     }
 
     #[Route('/game/{key}', name: 'game')]
