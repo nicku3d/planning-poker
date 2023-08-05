@@ -12,20 +12,23 @@ class PlanningPokerController extends AbstractController
 {
 
     #[Route('/', name: 'homepage')]
-    public function homepage(): Response
+    public function getHomepageView(): Response
     {
         return $this->render('planning-poker/homepage.html.twig', [
             'title' => 'Planning Poker',
         ]);
     }
 
-    public function createGame(): Response
+    #[Route('/games/new', name: 'new-game')]
+    public function getNewGameView(): Response
     {
-        return new Response('Creating game');
+        return $this->render('planning-poker/new_game.html.twig', [
+            'title' => 'Creating game',
+        ]);
     }
 
-    #[Route('/game/{key}', name: 'game')]
-    public function game(string $key): Response
+    #[Route('/games/{key}', name: 'game')]
+    public function getGameView(string $key): Response
     {
         return new Response('Game key: ' . $key);
     }

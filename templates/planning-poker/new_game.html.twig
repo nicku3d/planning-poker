@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h1>{{ title }}</h1>
+    <form
+            data-controller="create-game"
+            data-create-game-target="form"
+            action="{{ path('api-game-create') }}" method="POST"
+    >
+        <input type="text" name="title" placeholder="Title" required>
+        <textarea name="description" placeholder="Description" required></textarea>
+        <button type="submit">Create Game</button>
+    </form>
+{% endblock %}
