@@ -19,7 +19,7 @@ class PlanningPokerController extends AbstractController
         ]);
     }
 
-    #[Route('/games/new', name: 'new-game')]
+    #[Route('/new-game', name: 'new-game')]
     public function getNewGameView(): Response
     {
         return $this->render('planning-poker/new_game.html.twig', [
