@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Repository\GameRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -28,8 +29,18 @@ class PlanningPokerController extends AbstractController
     }
 
     #[Route('/games/{key}', name: 'game')]
-    public function getGameView(string $key): Response
+    public function getGameView(string $key, GameRepository $gameRepository): Response
     {
-        return new Response('Game key: ' . $key);
+        $game = $gameRepository->findOneBy(['key' => $key]);
+        if (!$game) {
+           $this->createNotFoundException(
+               sprintf('Cannot find a game with key %s', $key)
+           );
+        }
+
+        return $this->render('planning-poker/game.html.twig', [
+            'title' => 'NEW COOL GAME',
+            'game' => $game,
+        ]);
     }
 }
